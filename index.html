@@ -10,6 +10,7 @@
     <div class="stars"></div>
     <div class="shooting-star"></div>
     <div class="background-blur"></div>
+
     <div class="container">
         <h1 class="rainbow">Hello there!</h1>
         <p class="intro">I'm Nat, he/him, Indonesian, trying to learn Android. Can be annoying sometimes.</p>
@@ -26,10 +27,14 @@
     <!-- Background music -->
     <audio id="bg-music" src="music.mp3" loop></audio>
 
-    <!-- Music controls for mobile -->
+    <!-- Music controls with icons -->
     <div class="music-controls">
-        <button onclick="document.getElementById('bg-music').play()">Play Music</button>
-        <button onclick="document.getElementById('bg-music').pause()">Pause Music</button>
+        <button onclick="document.getElementById('bg-music').play()">
+            <img src="play.png" alt="Play" class="music-icon">
+        </button>
+        <button onclick="document.getElementById('bg-music').pause()">
+            <img src="pause.png" alt="Pause" class="music-icon">
+        </button>
     </div>
 </body>
 </html>
