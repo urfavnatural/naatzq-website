@@ -24,6 +24,12 @@
     </div>
 
     <!-- Background music -->
-    <audio id="bg-music" src="music.mp3" autoplay loop></audio>
+    <audio id="bg-music" src="music.mp3" loop></audio>
+
+    <!-- Music controls for mobile -->
+    <div class="music-controls">
+        <button onclick="document.getElementById('bg-music').play()">Play Music</button>
+        <button onclick="document.getElementById('bg-music').pause()">Pause Music</button>
+    </div>
 </body>
 </html>
