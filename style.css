@@ -137,3 +137,26 @@ body {
     transform: scale(1.2);
     cursor: pointer;
 }
+
+/* Music controls */
+.music-controls {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    display: flex;
+    gap: 10px;
+}
+
+.music-controls button {
+    padding: 8px 12px;
+    background: rgba(255,255,255,0.2);
+    border: none;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.music-controls button:hover {
+    background: rgba(255,255,255,0.4);
+}
