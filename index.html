@@ -14,6 +14,10 @@
     <div class="container">
         <h1 class="rainbow">Hello there!</h1>
         <p class="intro">I'm Nat, a 14-year-old boy trying to code. I'm from Indonesia.</p>
+
+        <!-- Visitor counter -->
+        <p class="visitor-count" id="visitor-count">Visitors: 0</p>
+
         <div class="socials">
             <a href="https://instagram.com/strawberries.ssh" target="_blank">
                 <img src="instagram.png" alt="Instagram">
@@ -36,5 +40,19 @@
             <img src="pause.png" alt="Pause" class="music-icon">
         </button>
     </div>
+
+    <!-- Visitor counter script -->
+    <script>
+        // Fetches the global visitor count from CountAPI
+        fetch('https://api.countapi.xyz/hit/nat-website/visits')
+        .then(res => res.json())
+        .then(data => {
+            // Updates the text on the page
+            document.getElementById('visitor-count').textContent = `Number of people opened this website: ${data.value}`;
+        })
+        .catch(err => {
+            console.error('CountAPI error:', err);
+        });
+    </script>
 </body>
 </html>
