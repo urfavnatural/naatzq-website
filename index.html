@@ -23,18 +23,23 @@
   <!-- Hero -->
   <section id="home" class="hero">
     <h1>Hi, I'm <span>Natural</span></h1>
-    <p>Tech Enthusiast • A newbie trying to learn more Android & Linux and also Windows</p>
+    <p>Tech Enthusiast • Android Tweaker • Builder</p>
     <a href="#about" class="btn">Explore</a>
+  </section>
+
+  <!-- 2026 Countdown -->
+  <section class="section" id="countdown-section">
+    <h2>2026 Countdown (UTC+7)</h2>
+    <p id="countdown" style="font-size: 1.5rem; text-align: center;"></p>
   </section>
 
   <!-- About -->
   <section id="about" class="section">
     <h2>About Me</h2>
     <p>
-      I'm just some random boy that lives in Indonesia
-      trying some stuff & learn new stuff. Lol
-      
-      
+      I enjoy building tools, experimenting with Android systems,
+      and sharing useful software openly.
+      Always learning, always improving.
     </p>
   </section>
 
@@ -121,5 +126,37 @@
     <p>© 2025 Natural</p>
   </footer>
 
+  <!-- Countdown Script -->
+  <script>
+    function updateCountdown() {
+      const target = new Date("2026-01-01T00:00:00+07:00").getTime();
+      const hideAfter = new Date("2026-01-04T00:00:00+07:00").getTime(); // after Jan 3
+      const now = new Date().getTime();
+
+      if (now >= hideAfter) {
+        document.getElementById("countdown-section").style.display = "none";
+        return;
+      }
+
+      const diff = target - now;
+
+      if (diff <= 0) {
+        document.getElementById("countdown").innerText = "🎉 Happy New Year 2026!";
+        return;
+      }
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((diff / (1000 * 60)) % 60);
+      const seconds = Math.floor((diff / 1000) % 60);
+
+      document.getElementById("countdown").innerText =
+        `${days}d ${hours}h ${minutes}m ${seconds}s`;
+    }
+
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+  </script>
+
 </body>
-  </html>
+          </html>
