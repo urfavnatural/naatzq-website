@@ -1,58 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nat's Website</title>
-    <link rel="stylesheet" href="/style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Naatzq | Portfolio</title>
+  <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
-    <div class="stars"></div>
-    <div class="shooting-star"></div>
-    <div class="background-blur"></div>
 
-    <div class="container">
-        <h1 class="rainbow">Hello there!</h1>
-        <p class="intro">I'm Nat, a 14-year-old boy trying to code. I'm from Indonesia.</p>
+  <!-- Navbar -->
+  <header>
+    <h2 class="logo">Naatzq</h2>
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
 
-        <!-- Visitor counter -->
-        <p class="visitor-count" id="visitor-count">Visitors: 0</p>
+  <!-- Hero -->
+  <section id="home" class="hero">
+    <h1>Hi, I'm <span>Naatzq</span></h1>
+    <p>Android & Tech Enthusiast</p>
+    <a href="#projects" class="btn">View Projects</a>
+  </section>
 
-        <div class="socials">
-            <a href="https://instagram.com/strawberries.ssh" target="_blank">
-                <img src="instagram.png" alt="Instagram">
-            </a>
-            <a href="https://t.me/urfavnatural" target="_blank">
-                <img src="telegram.png" alt="Telegram">
-            </a>
-        </div>
+  <!-- About -->
+  <section id="about" class="section">
+    <h2>About Me</h2>
+    <p>
+      I'm someone who enjoys learning Android development, system tweaking,
+      and building things from scratch.  
+      Still learning, still growing 🚀
+    </p>
+  </section>
+
+  <!-- Projects -->
+  <section id="projects" class="section dark">
+    <h2>Projects</h2>
+
+    <div class="cards">
+      <div class="card">
+        <h3>Personal Website</h3>
+        <p>Simple portfolio website hosted on Vercel.</p>
+      </div>
+
+      <div class="card">
+        <h3>Android Tweaks</h3>
+        <p>Magisk modules & system optimization experiments.</p>
+      </div>
+
+      <div class="card">
+        <h3>Future Project</h3>
+        <p>More stuff coming soon 👀</p>
+      </div>
     </div>
+  </section>
 
-    <!-- Background music -->
-    <audio id="bg-music" src="music.mp3" loop></audio>
+  <!-- Contact -->
+  <section id="contact" class="section">
+    <h2>Contact</h2>
+    <p>Reach me on:</p>
 
-    <!-- Music controls with icons -->
-    <div class="music-controls">
-        <button onclick="document.getElementById('bg-music').play()">
-            <img src="play.png" alt="Play" class="music-icon">
-        </button>
-        <button onclick="document.getElementById('bg-music').pause()">
-            <img src="pause.png" alt="Pause" class="music-icon">
-        </button>
+    <div class="socials">
+      <a href="https://github.com/" target="_blank">GitHub</a>
+      <a href="https://instagram.com/" target="_blank">Instagram</a>
+      <a href="mailto:your@email.com">Email</a>
     </div>
+  </section>
 
-    <!-- Visitor counter script -->
-    <script>
-        // Fetches the global visitor count from CountAPI
-        fetch('https://api.countapi.xyz/hit/nat-website/visits')
-        .then(res => res.json())
-        .then(data => {
-            // Updates the text on the page
-            document.getElementById('visitor-count').textContent = `Number of people opened this website: ${data.value}`;
-        })
-        .catch(err => {
-            console.error('CountAPI error:', err);
-        });
-    </script>
+  <footer>
+    <p>© 2025 Natural. Almost 2026 🎉</p>
+  </footer>
+
 </body>
-</html>
+    </html>
