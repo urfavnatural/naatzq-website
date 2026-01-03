@@ -5,12 +5,36 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>my introduction and portfolio ig</title>
   <link rel="stylesheet" href="style.css"/>
+
+  <!-- Dark / Light Mode (ADDED) -->
+  <style>
+    body.dark {
+      background:#0f0f0f;
+      color:#eaeaea;
+    }
+    body.dark header,
+    body.dark footer,
+    body.dark .section.dark {
+      background:#111;
+    }
+    .theme-toggle {
+      background:none;
+      border:none;
+      font-size:1.2rem;
+      cursor:pointer;
+    }
+  </style>
 </head>
+
 <body>
 
   <!-- Navbar -->
   <header>
     <h2 class="logo">Natural</h2>
+
+    <!-- Dark mode toggle (ADDED) -->
+    <button class="theme-toggle" onclick="toggleTheme()">🌓</button>
+
     <nav>
       <a href="#home">Home</a>
       <a href="#about">About</a>
@@ -31,7 +55,7 @@
   <!-- 2026 Countdown -->
   <section class="section" id="countdown-section">
     <h2>2026 Countdown (UTC+7)</h2>
-    <p id="countdown" style="font-size: 1.5rem; text-align: center;"></p>
+    <p id="countdown" style="font-size:1.5rem;text-align:center;"></p>
   </section>
 
   <!-- About -->
@@ -76,60 +100,23 @@
     </div>
 
     <small style="opacity:0.7;">
-      All values are detected locally in your browser. No data is sent anywhere.
+      All values are detected locally in your browser.
     </small>
   </section>
 
-  <!-- Softwares & Games (RESTORED) -->
+  <!-- Softwares & Games -->
   <section id="softwares" class="section">
     <h2>Utilities</h2>
 
     <div class="software-grid">
-
-      <!-- Firefox -->
       <div class="software-card">
-        <img
-          src="images/firefox.png"
-          alt="Firefox Browser"
-          style="
-            max-width: 100%;
-            height: auto;
-            max-height: 120px;
-            display: block;
-            margin: 0 auto 15px;
-            object-fit: contain;
-          "
-        >
-
+        <img src="images/firefox.png" alt="Firefox Browser" style="max-height:120px;">
         <h3>Firefox Browser (PC)</h3>
-
         <p>
           Fast, secure, and privacy-focused open-source web browser
-          for Windows, macOS, and Linux. Built by Mozilla with
-          strong tracker protection and full customization.
+          for Windows, macOS, and Linux.
         </p>
-
-        <div class="meta">
-          <span>Version: 123.0</span>
-          <span>Size: ~65 MB</span>
-        </div>
-
-        <div class="download-group">
-          <a href="https://github.com/urfavnatural/naatzq-website/releases/download/v123.0/Firefox-123.0-Windows.exe"
-             target="_blank" class="download-btn">Windows</a>
-
-          <a href="https://github.com/urfavnatural/naatzq-website/releases/download/v123.0/Firefox-123.0-macOS.dmg"
-             target="_blank" class="download-btn">macOS</a>
-
-          <a href="https://github.com/urfavnatural/naatzq-website/releases/download/v123.0/Firefox-123.0-Linux.tar.xz"
-             target="_blank" class="download-btn">Linux</a>
-        </div>
-
-        <small class="legal">
-          Firefox is a trademark of Mozilla. Files are distributed via GitHub Releases.
-        </small>
       </div>
-
     </div>
   </section>
 
@@ -140,7 +127,6 @@
       <a href="https://instagram.com/strawberries.ssh" target="_blank">Instagram</a>
       <a href="https://github.com/urfavnatural" target="_blank">GitHub</a>
       <a href="https://t.me/urfavnatural" target="_blank">Telegram</a>
-      <a href="#">Email</a>
     </div>
   </section>
 
@@ -148,12 +134,12 @@
     <p>© 2025 Natural</p>
   </footer>
 
-  <!-- Countdown Script -->
+  <!-- Countdown Script (RESTORED) -->
   <script>
     function updateCountdown() {
       const target = new Date("2026-01-01T00:00:00+07:00").getTime();
       const hideAfter = new Date("2026-01-04T00:00:00+07:00").getTime();
-      const now = new Date().getTime();
+      const now = Date.now();
 
       if (now >= hideAfter) {
         document.getElementById("countdown-section").style.display = "none";
@@ -162,83 +148,88 @@
 
       const diff = target - now;
       if (diff <= 0) {
-        document.getElementById("countdown").innerText = "🎉 Happy New Year 2026!";
+        countdown.innerText = "🎉 Happy New Year 2026!";
         return;
       }
 
-      const d = Math.floor(diff / (1000 * 60 * 60 * 24));
-      const h = Math.floor((diff / (1000 * 60 * 60)) % 24);
-      const m = Math.floor((diff / (1000 * 60)) % 60);
-      const s = Math.floor((diff / 1000) % 60);
+      const d = Math.floor(diff / 86400000);
+      const h = Math.floor(diff / 3600000) % 24;
+      const m = Math.floor(diff / 60000) % 60;
+      const s = Math.floor(diff / 1000) % 60;
 
-      document.getElementById("countdown").innerText =
-        `${d}d ${h}h ${m}m ${s}s`;
+      countdown.innerText = `${d}d ${h}h ${m}m ${s}s`;
     }
-
     updateCountdown();
     setInterval(updateCountdown, 1000);
   </script>
 
-  <!-- Experiments Script -->
+  <!-- Experiments Script (RESTORED) -->
   <script>
     const ua = navigator.userAgent;
 
-    document.getElementById("browser").innerText =
+    browser.innerText =
       ua.includes("Firefox") ? "Mozilla Firefox" :
       ua.includes("Edg") ? "Microsoft Edge" :
       ua.includes("Chrome") ? "Google Chrome" :
       ua.includes("Safari") ? "Safari" : "Unknown";
 
-    document.getElementById("os").innerText =
+    os.innerText =
       ua.includes("Windows") ? "Windows" :
       ua.includes("Android") ? "Android" :
       ua.includes("Linux") ? "Linux" :
       ua.includes("Mac OS") ? "macOS" :
       ua.includes("iPhone") || ua.includes("iPad") ? "iOS" : "Unknown";
 
-    document.getElementById("device").innerText =
+    device.innerText =
       /Android|iPhone|iPad|Mobile/i.test(ua) ? "Mobile" : "PC";
 
     const match = ua.match(/\((.*?)\)/);
-    document.getElementById("model").innerText =
+    model.innerText =
       match && match[1].includes("Android") ? match[1] : "Not available";
 
-    document.getElementById("resolution").innerText =
-      `${screen.width} × ${screen.height}`;
+    resolution.innerText = `${screen.width} × ${screen.height}`;
 
-    document.getElementById("cpu").innerText =
-      navigator.hardwareConcurrency
-        ? navigator.hardwareConcurrency + " cores"
-        : "Unavailable";
+    cpu.innerText = navigator.hardwareConcurrency
+      ? navigator.hardwareConcurrency + " cores"
+      : "Unavailable";
 
-    document.getElementById("ram").innerText =
-      navigator.deviceMemory
-        ? navigator.deviceMemory + " GB (approx)"
-        : "Unavailable";
+    ram.innerText = navigator.deviceMemory
+      ? navigator.deviceMemory + " GB (approx)"
+      : "Unavailable";
 
     const canvas = document.createElement("canvas");
     const gl = canvas.getContext("webgl");
     if (gl) {
       const debug = gl.getExtension("WEBGL_debug_renderer_info");
-      document.getElementById("gpu").innerText =
-        debug ? gl.getParameter(debug.UNMASKED_RENDERER_WEBGL)
-              : "WebGL supported (masked)";
+      gpu.innerText = debug
+        ? gl.getParameter(debug.UNMASKED_RENDERER_WEBGL)
+        : "WebGL supported (masked)";
     } else {
-      document.getElementById("gpu").innerText = "WebGL not supported";
+      gpu.innerText = "WebGL not supported";
     }
 
     let frames = 0, start;
     function measure(t) {
       if (!start) start = t;
       frames++;
-      if (t - start < 1000) {
-        requestAnimationFrame(measure);
-      } else {
-        document.getElementById("refresh").innerText =
-          Math.round(frames) + " Hz (estimated)";
-      }
+      if (t - start < 1000) requestAnimationFrame(measure);
+      else refresh.innerText = Math.round(frames) + " Hz (estimated)";
     }
     requestAnimationFrame(measure);
+  </script>
+
+  <!-- Dark / Light Script (ADDED) -->
+  <script>
+    function toggleTheme() {
+      document.body.classList.toggle("dark");
+      localStorage.setItem(
+        "theme",
+        document.body.classList.contains("dark") ? "dark" : "light"
+      );
+    }
+    if (localStorage.getItem("theme") === "dark") {
+      document.body.classList.add("dark");
+    }
   </script>
 
 </body>
