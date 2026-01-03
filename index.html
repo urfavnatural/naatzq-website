@@ -16,6 +16,7 @@
       <a href="#about">About</a>
       <a href="#projects">Projects</a>
       <a href="#softwares">Softwares & Games</a>
+      <a href="#experiments">Experiments</a>
       <a href="#contact">Contact</a>
     </nav>
   </header>
@@ -40,8 +41,6 @@
       I'm just a random boy from Indonesia,
       trying to code & program & learn more about
       Linux. I'm still very new to Linux
-      
-      
     </p>
   </section>
 
@@ -60,57 +59,25 @@
     </div>
   </section>
 
-  <!-- Softwares & Games -->
-  <section id="softwares" class="section">
-    <h2>Utilities</h2>
+  <!-- Experiments -->
+  <section id="experiments" class="section">
+    <h2>Experiments</h2>
 
-    <div class="software-grid">
-
-      <!-- Firefox -->
-      <div class="software-card">
-        <img
-          src="images/firefox.png"
-          alt="Firefox Browser"
-          style="
-            max-width: 100%;
-            height: auto;
-            max-height: 120px;
-            display: block;
-            margin: 0 auto 15px;
-            object-fit: contain;
-          "
-        >
-
-        <h3>Firefox Browser (PC)</h3>
-
-        <p>
-          Fast, secure, and privacy-focused open-source web browser
-          for Windows, macOS, and Linux. Built by Mozilla with
-          strong tracker protection and full customization.
-        </p>
-
-        <div class="meta">
-          <span>Version: 123.0</span>
-          <span>Size: ~65 MB</span>
-        </div>
-
-        <div class="download-group">
-          <a href="https://github.com/urfavnatural/naatzq-website/releases/download/v123.0/Firefox-123.0-Windows.exe"
-             target="_blank" class="download-btn">Windows</a>
-
-          <a href="https://github.com/urfavnatural/naatzq-website/releases/download/v123.0/Firefox-123.0-macOS.dmg"
-             target="_blank" class="download-btn">macOS</a>
-
-          <a href="https://github.com/urfavnatural/naatzq-website/releases/download/v123.0/Firefox-123.0-Linux.tar.xz"
-             target="_blank" class="download-btn">Linux</a>
-        </div>
-
-        <small class="legal">
-          Firefox is a trademark of Mozilla. Files are distributed via GitHub Releases.
-        </small>
-      </div>
-
+    <div class="cards">
+      <div class="card"><h3>Browser</h3><p id="browser">Detecting…</p></div>
+      <div class="card"><h3>Operating System</h3><p id="os">Detecting…</p></div>
+      <div class="card"><h3>Device Type</h3><p id="device">Detecting…</p></div>
+      <div class="card"><h3>Device Model</h3><p id="model">Detecting…</p></div>
+      <div class="card"><h3>Screen Resolution</h3><p id="resolution">Detecting…</p></div>
+      <div class="card"><h3>Refresh Rate</h3><p id="refresh">Measuring…</p></div>
+      <div class="card"><h3>CPU Cores</h3><p id="cpu">Detecting…</p></div>
+      <div class="card"><h3>Device RAM</h3><p id="ram">Detecting…</p></div>
+      <div class="card"><h3>GPU Renderer</h3><p id="gpu">Detecting…</p></div>
     </div>
+
+    <small style="opacity:0.7;">
+      All values are client-side only. No data is stored or transmitted.
+    </small>
   </section>
 
   <!-- Contact -->
@@ -132,7 +99,7 @@
   <script>
     function updateCountdown() {
       const target = new Date("2026-01-01T00:00:00+07:00").getTime();
-      const hideAfter = new Date("2026-01-04T00:00:00+07:00").getTime(); // after Jan 3
+      const hideAfter = new Date("2026-01-04T00:00:00+07:00").getTime();
       const now = new Date().getTime();
 
       if (now >= hideAfter) {
@@ -141,24 +108,88 @@
       }
 
       const diff = target - now;
-
       if (diff <= 0) {
         document.getElementById("countdown").innerText = "🎉 Happy New Year 2026!";
         return;
       }
 
-      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-      const minutes = Math.floor((diff / (1000 * 60)) % 60);
-      const seconds = Math.floor((diff / 1000) % 60);
+      const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const h = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const m = Math.floor((diff / (1000 * 60)) % 60);
+      const s = Math.floor((diff / 1000) % 60);
 
       document.getElementById("countdown").innerText =
-        `${days}d ${hours}h ${minutes}m ${seconds}s`;
+        `${d}d ${h}h ${m}m ${s}s`;
     }
 
     updateCountdown();
     setInterval(updateCountdown, 1000);
   </script>
 
+  <!-- Experiments Script -->
+  <script>
+    const ua = navigator.userAgent;
+
+    document.getElementById("browser").innerText =
+      ua.includes("Firefox") ? "Mozilla Firefox" :
+      ua.includes("Edg") ? "Microsoft Edge" :
+      ua.includes("Chrome") ? "Google Chrome" :
+      ua.includes("Safari") ? "Safari" : "Unknown";
+
+    document.getElementById("os").innerText =
+      ua.includes("Windows") ? "Windows" :
+      ua.includes("Android") ? "Android" :
+      ua.includes("Linux") ? "Linux" :
+      ua.includes("Mac OS") ? "macOS" :
+      ua.includes("iPhone") || ua.includes("iPad") ? "iOS" : "Unknown";
+
+    document.getElementById("device").innerText =
+      /Android|iPhone|iPad|Mobile/i.test(ua) ? "Mobile" : "PC";
+
+    const match = ua.match(/\((.*?)\)/);
+    document.getElementById("model").innerText =
+      match && match[1].includes("Android") ? match[1] : "Not available";
+
+    document.getElementById("resolution").innerText =
+      `${screen.width} × ${screen.height}`;
+
+    document.getElementById("cpu").innerText =
+      navigator.hardwareConcurrency
+        ? navigator.hardwareConcurrency + " cores"
+        : "Unavailable";
+
+    document.getElementById("ram").innerText =
+      navigator.deviceMemory
+        ? navigator.deviceMemory + " GB (approx)"
+        : "Unavailable";
+
+    // GPU detection
+    const canvas = document.createElement("canvas");
+    const gl = canvas.getContext("webgl");
+    if (gl) {
+      const debug = gl.getExtension("WEBGL_debug_renderer_info");
+      document.getElementById("gpu").innerText =
+        debug
+          ? gl.getParameter(debug.UNMASKED_RENDERER_WEBGL)
+          : "WebGL supported (masked)";
+    } else {
+      document.getElementById("gpu").innerText = "WebGL not supported";
+    }
+
+    // Refresh rate estimation
+    let frames = 0, start;
+    function measure(t) {
+      if (!start) start = t;
+      frames++;
+      if (t - start < 1000) {
+        requestAnimationFrame(measure);
+      } else {
+        document.getElementById("refresh").innerText =
+          Math.round(frames) + " Hz (estimated)";
+      }
+    }
+    requestAnimationFrame(measure);
+  </script>
+
 </body>
-          </html>
+  </html>
