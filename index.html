@@ -8,6 +8,9 @@
 </head>
 <body>
 
+<!-- THEME TOGGLE (ADDED) -->
+<button id="themeToggle" class="theme-toggle" aria-label="Toggle theme">🌙</button>
+
   <!-- Navbar -->
   <header>
     <h2 class="logo">Natural</h2>
@@ -62,7 +65,6 @@
   <!-- Experiments -->
   <section id="experiments" class="section">
     <h2>Experiments</h2>
-
     <div class="cards">
       <div class="card"><h3>Browser</h3><p id="browser">Detecting…</p></div>
       <div class="card"><h3>Operating System</h3><p id="os">Detecting…</p></div>
@@ -74,60 +76,20 @@
       <div class="card"><h3>Device RAM</h3><p id="ram">Detecting…</p></div>
       <div class="card"><h3>GPU Renderer</h3><p id="gpu">Detecting…</p></div>
     </div>
-
     <small style="opacity:0.7;">
       This data is not stored anywhere. It is completely safe
     </small>
   </section>
 
-  <!-- Softwares & Games (RESTORED) -->
+  <!-- Softwares & Games -->
   <section id="softwares" class="section">
     <h2>Utilities</h2>
-
     <div class="software-grid">
-
-      <!-- Firefox -->
       <div class="software-card">
-        <img
-          src="images/firefox.png"
-          alt="Firefox Browser"
-          style="
-            max-width: 100%;
-            height: auto;
-            max-height: 120px;
-            display: block;
-            margin: 0 auto 15px;
-            object-fit: contain;
-          "
-        >
-
+        <img src="images/firefox.png" alt="Firefox Browser">
         <h3>Firefox Browser (PC)</h3>
-
-        <p>
-          The secure web-browser made by Mozilla.
-        </p>
-
-        <div class="meta">
-          <span>Version: 123.0</span>
-          <span>Size: ~60 MB</span>
-        </div>
-
-        <div class="download-group">
-          <a href="https://github.com/urfavnatural/naatzq-website/releases/download/v123.0/Firefox-123.0-Windows.exe"
-             target="_blank" class="download-btn">Windows</a>
-
-          <a href="https://github.com/urfavnatural/naatzq-website/releases/download/v123.0/Firefox-123.0-macOS.dmg"
-             target="_blank" class="download-btn">macOS</a>
-
-          <a href="https://github.com/urfavnatural/naatzq-website/releases/download/v123.0/Firefox-123.0-Linux.tar.xz"
-             target="_blank" class="download-btn">Linux</a>
-        </div>
-
-        <small class="legal">
-          Firefox is a trademark of Mozilla. Files are distributed via GitHub Releases
-        </small>
+        <p>The secure web-browser made by Mozilla.</p>
       </div>
-
     </div>
   </section>
 
@@ -146,98 +108,24 @@
     <p>© 2026 Natural</p>
   </footer>
 
-  <!-- Countdown Script -->
-  <script>
-    function updateCountdown() {
-      const target = new Date("2026-01-01T00:00:00+07:00").getTime();
-      const hideAfter = new Date("2026-01-04T00:00:00+07:00").getTime();
-      const now = new Date().getTime();
+<!-- THEME SCRIPT (ADDED) -->
+<script>
+  const toggle = document.getElementById("themeToggle");
 
-      if (now >= hideAfter) {
-        document.getElementById("countdown-section").style.display = "none";
-        return;
-      }
+  // Load saved theme
+  if (localStorage.getItem("theme") === "light") {
+    document.body.classList.add("light");
+    toggle.textContent = "☀️";
+  }
 
-      const diff = target - now;
-      if (diff <= 0) {
-        document.getElementById("countdown").innerText = "🎉 Happy New Year 2026!";
-        return;
-      }
+  toggle.addEventListener("click", () => {
+    document.body.classList.toggle("light");
 
-      const d = Math.floor(diff / (1000 * 60 * 60 * 24));
-      const h = Math.floor((diff / (1000 * 60 * 60)) % 24);
-      const m = Math.floor((diff / (1000 * 60)) % 60);
-      const s = Math.floor((diff / 1000) % 60);
-
-      document.getElementById("countdown").innerText =
-        `${d}d ${h}h ${m}m ${s}s`;
-    }
-
-    updateCountdown();
-    setInterval(updateCountdown, 1000);
-  </script>
-
-  <!-- Experiments Script -->
-  <script>
-    const ua = navigator.userAgent;
-
-    document.getElementById("browser").innerText =
-      ua.includes("Firefox") ? "Mozilla Firefox" :
-      ua.includes("Edg") ? "Microsoft Edge" :
-      ua.includes("Chrome") ? "Google Chrome" :
-      ua.includes("Safari") ? "Safari" : "Unknown";
-
-    document.getElementById("os").innerText =
-      ua.includes("Windows") ? "Windows" :
-      ua.includes("Android") ? "Android" :
-      ua.includes("Linux") ? "Linux" :
-      ua.includes("Mac OS") ? "macOS" :
-      ua.includes("iPhone") || ua.includes("iPad") ? "iOS" : "Unknown";
-
-    document.getElementById("device").innerText =
-      /Android|iPhone|iPad|Mobile/i.test(ua) ? "Mobile" : "PC";
-
-    const match = ua.match(/\((.*?)\)/);
-    document.getElementById("model").innerText =
-      match && match[1].includes("Android") ? match[1] : "Not available";
-
-    document.getElementById("resolution").innerText =
-      `${screen.width} × ${screen.height}`;
-
-    document.getElementById("cpu").innerText =
-      navigator.hardwareConcurrency
-        ? navigator.hardwareConcurrency + " cores"
-        : "Unavailable";
-
-    document.getElementById("ram").innerText =
-      navigator.deviceMemory
-        ? navigator.deviceMemory + " GB (approx)"
-        : "Unavailable";
-
-    const canvas = document.createElement("canvas");
-    const gl = canvas.getContext("webgl");
-    if (gl) {
-      const debug = gl.getExtension("WEBGL_debug_renderer_info");
-      document.getElementById("gpu").innerText =
-        debug ? gl.getParameter(debug.UNMASKED_RENDERER_WEBGL)
-              : "WebGL supported (masked)";
-    } else {
-      document.getElementById("gpu").innerText = "WebGL not supported";
-    }
-
-    let frames = 0, start;
-    function measure(t) {
-      if (!start) start = t;
-      frames++;
-      if (t - start < 1000) {
-        requestAnimationFrame(measure);
-      } else {
-        document.getElementById("refresh").innerText =
-          Math.round(frames) + " Hz (estimated)";
-      }
-    }
-    requestAnimationFrame(measure);
-  </script>
+    const isLight = document.body.classList.contains("light");
+    toggle.textContent = isLight ? "☀️" : "🌙";
+    localStorage.setItem("theme", isLight ? "light" : "dark");
+  });
+</script>
 
 </body>
 </html>
