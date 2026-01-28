@@ -8,3 +8,7 @@ Website changelogs 04-01-2026:
 + added Utilites, ill add more apps soon
 + the website should working fine on mobile and pc/laptop whatever
 + ok
+
+Website changelogs 28-01-2026:
++ Liquid glass support (may add more lag for low devices)
++ More soon
