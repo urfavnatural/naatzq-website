@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>Hello!</title>
+
+<style>
+
+body{
+  background:#1b1f2a;
+  font-family: Arial;
+  color:white;
+}
+
+.window{
+  width:700px;
+  height:400px;
+  background:#dfe6f2;
+  border-radius:8px;
+  box-shadow:0 0 10px black;
+  display:flex;
+  margin:50px auto;
+}
+
+.sidebar{
+  width:180px;
+  background:#2c3e6b;
+  padding:10px;
+}
+
+.sidebar button{
+  width:100%;
+  padding:10px;
+  margin-bottom:5px;
+  background:#3b5fbf;
+  border:none;
+  color:white;
+  cursor:pointer;
+  border-radius:4px;
+}
+
+.sidebar button:hover{
+  background:#5b7cff;
+}
+
+.sidebar button.active{
+  background:#9bb2ff;
+  color:black;
+}
+
+.content{
+  flex:1;
+  padding:20px;
+  color:black;
+  display:none;
+}
+
+.content.active{
+  display:block;
+}
+
+img{
+  width:200px;
+}
+
+.homescreen-image
+  width: 220px;
+  height: auto;
+  display: block;
+  margin: 10px 0;
+{
+    
+.pfp
+  width: 220px;
+  height: auto;
+  display: block;
+  margin: 10px 0;
+{
+ 
+ .home-icon{
+  width:16px;
+  height:16px;
+  vertical-align: middle;
+  margin-right:8px;
+}   
+
+.info-icon{
+    width:16px;
+    height:16px;
+    vertical-align; middle;
+    margin-right:8px;
+}
+
+.desktop-icon{
+    width:16px;
+    height:16px;
+    vertical-align; middle;
+    margin-right:8px;
+}
+
+.projects-icon{
+    width:16px;
+    height:16px;
+    vertical-align; middle;
+    margin-right:8px;
+}    
+</style>
+</head>
+
+<body>
+
+<div class="window">
+
+  <div class="sidebar">
+    <button onclick="openTab('home')" class="active">
+  <img src="icons/home.png" class="home-icon">
+  Home
+</button>
+    <button onclick="openTab('info')"><img src="icons/info.ico" class=info-icon>Info</button>
+    <button onclick="openTab('homescreen')"><img src="icons/desktop.ico" class=desktop-icon>Homescreens</button>
+    <button onclick="openTab('projects')"><img src="icons/project.ico" class=projects-icon>Projects</button>
+  </div>
+
+  <div id="home" class="content active">
+    <img src="photo.png" class="pfp">
+    <h2>Hi, and welcome to my website!</h2>
+    <p>This website is still under construction, so expect broken css and stuff!</p>
+  </div>
+
+  <div id="info" class="content">
+    <h3>Info</h3>
+    <p>This site is heavily inspired by 
+      <a href="https://malworcze.nekoweb.org/" target="_blank">
+      Malworcze's website
+      </a>
+    </p>
+  </div>
+
+  <div id="homescreen" class="content">
+      <h3>Homescreens</h3>
+    <img src="homescreen1.png" class="homescreen-img">
+    <p class="desc-small">This is my phone homescreen as of 01/30/2026, I'll post my desktop when it gets fixed!</p>
+  </div>
+  
+  <div id="projects" class="content">
+      <h3>Projects</h3>
+      <p>Welcome to projects page!</p>
+      <p class="desc-small">This is where i'll post my stuff, and other people useful stuff! (with credits!)</p>
+</div>
+
+<script>
+function openTab(tabName){
+  let contents=document.getElementsByClassName("content");
+  let buttons=document.querySelectorAll(".sidebar button");
+
+  for(let i=0;i<contents.length;i++){
+    contents[i].classList.remove("active");
+  }
+
+  for(let i=0;i<buttons.length;i++){
+    buttons[i].classList.remove("active");
+  }
+
+  document.getElementById(tabName).classList.add("active");
+  event.target.classList.add("active");
+}
+</script>
+
+</body>
+</html>
